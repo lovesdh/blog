@@ -1,0 +1,98 @@
+.container{
+	position: absolute;
+	top: 5%;
+	left: 36%;
+}
+.self{
+	position:absolute;
+	top:15%;
+	left: 15%;
+	text-align:center;
+	width:70%;
+}
+.span ul{
+				position:absolute;
+				top: 50px;
+				left: 100px;
+				width: 50px;
+				height: 200px;
+		}
+.span li{
+				line-height: 50px;
+				list-style-type: none;
+		}
+h1{
+	line-height:80px;
+	color:#ffffff;
+	font-size: 50px;
+}
+p{
+	line-break: 50px;
+	font-size: 18px;
+	color: #ffffff;
+}
+.btn{
+	position: absolute;
+	bottom: 10%;
+	left: 45%;
+	width:180px;
+	height:60px;
+	background-color: #7cacae;
+	color:#fff;
+	font-size:20px;
+	line-height:40px;
+	margin:20px auto;
+	border-radius: 10px;
+	transition: 1.5s;
+}
+.btn:hover{
+	width:200px;
+	height:80px;
+	background-color: skyblue;
+	line-height:60px;
+	;
+	
+}
+a{
+ 	text-decoration: none;
+ }
+ .weather-info {
+	color: aquamarine;
+	font-weight: bold;
+	font-size: large;
+	position: absolute;
+	left: 8%;
+	top: 43%;
+  }
+.weatherpic{
+	position: absolute;
+	bottom: 47%;
+	left: 8%;
+	color: aqua;
+}
+.oneword-info{
+	border: 2px solid  ;
+    border-radius: 5px;
+	position: absolute;
+	bottom: 8%;
+	right: 5%;
+	color: #FFDEAD;
+	font-size: large;
+	font-family: Arial;
+	background: linear-gradient(to left, #2CD5FF, #2CD5FF) left top no-repeat,
+	linear-gradient(to bottom, #2CD5FF, #2CD5FF) left top no-repeat,
+	linear-gradient(to left, #2CD5FF, #2CD5FF) right top no-repeat,
+	linear-gradient(to bottom, #2CD5FF, #2CD5FF) right top no-repeat,
+	linear-gradient(to left, #2CD5FF, #2CD5FF) left bottom no-repeat,
+	linear-gradient(to bottom, #2CD5FF, #2CD5FF) left bottom no-repeat,
+	linear-gradient(to left, #2CD5FF, #2CD5FF) right bottom no-repeat,
+	linear-gradient(to left, #2CD5FF, #2CD5FF) right bottom no-repeat;
+	background-size: 4px 20px, 20px 4px, 4px 20px, 20px 4px;
+	border: 1px solid #073F97;
+	}
+.oneword-info span {
+	display: inline-block;
+	background:#05286C;
+	color: #19E8FE;
+	border-radius: 0 0 10px 10px;
+	}
