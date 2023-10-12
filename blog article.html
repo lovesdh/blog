@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>    
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+
+    <style>
+		html,body{
+			height:90%;
+			margin:0;
+			padding:0;
+            font-family: 'Noto Serif', serif;
+			}
+		body{
+				background: rgb(153, 255, 0) url(img/天空，云彩，阳光.jpg) center center;
+				background-size: cover;
+			}	
+
+        .box {
+            float: left;
+            margin: 15px;
+            width: 150px;
+            height: 100px;
+            border-radius: 5px;
+            background-color: rgb(207, 232, 220);
+            padding: 1em;
+            font-size: 30px;
+            }
+
+        .toptext {
+            background-color: rgb(79, 185, 227);
+            padding: 10px;
+            color: #fff;
+            font-family: 'ZCOOL KuaiLe', sans-serif;
+            font-size: 25px;
+            }
+
+        .topbox {
+            background-color: rgb(79, 185, 227);
+            padding: 10px;
+            color: #fff;
+            }
+
+        .mypic{
+            clear: left;
+            position: absolute;
+            left: 2%;
+            top: 25%;
+            border-radius: 5px;
+            padding: 0.5%;
+            background-color: lightblue;
+            }
+
+         .box-container {
+            margin: 100;
+            width: 1200px;
+            height: 672px;
+            background-color: #f2f2f2;
+            border: 1px solid pink;
+            border-radius: 20px;
+            display: flex;
+            justify-content: center;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+			opacity:0.85;
+        }
+
+        .box-content {
+            font-size: 20px;
+            color: #333;
+            text-align: center;
+            overflow: auto;
+            padding: 10px 150px;
+            box-sizing: border-box;
+            word-wrap: break-word;
+
+        }
+
+        .oneword-info{
+            width: 150px;
+            border: 2px solid  ;
+            border-radius: 5px;
+            position: absolute;
+            bottom: 40%;
+            right: 2%;
+            color: #FFDEAD;
+            font-size: large;
+            font-family: Arial;
+            }
+
+        #sort-time-btn{
+            width:200px;
+            height:50px;
+            background-color: #5bdbe0;
+            color:#fff;
+            font-size:20px;
+            line-height:40px;
+            margin:20px auto;
+            border-radius: 10px;
+            font-family: 'ZCOOL KuaiLe', sans-serif;
+            position: absolute;
+            top: auto;
+            left: 30%;
+            margin: auto;
+        }
+
+        #sort-likes-btn{
+            width:200px;
+            height:50px;
+            background-color: #5bdbe0;
+            color:#fff;
+            font-size:20px;
+            line-height:40px;
+            margin:20px auto;
+            border-radius: 10px;
+            font-family: 'ZCOOL KuaiLe', sans-serif;
+            position: absolute;
+            top: auto;
+            right: 30%;
+            margin: auto;
+        }
+
+        #add-btn{
+            width:200px;
+            height:50px;
+            background-color: #5ba2e0;
+            color:#fff;
+            font-size:20px;
+            line-height:40px;
+            margin:20px auto;
+            border-radius: 10px;
+            font-family: 'ZCOOL KuaiLe', sans-serif;
+            position: relative;
+            top: auto;
+            margin: auto;
+            position: absolute;
+            top: 7%;
+            left: 80%;
+        }
+
+    </style>
+
+</head>
+<body>
+
+    <div class="topbox">
+        <div class="box">Let's take notes!
+        </div>
+
+        <p class="toptext">
+        &emsp;&emsp;<em>尽情创作你的笔记！ 愿成微光，不为江水。</em>
+        </p>
+    </div>
+
+    <div class="mypic">
+        <img src="img\头像.jpg" height="150" width="150" title="头像"/>
+        <p style="text-align: center;color: rgb(71, 181, 139);font-size: large;"><a href="blog profile.html">fufu</a></p>
+        <a href="https://space.bilibili.com/499472437?spm_id_from=333.1007.0.0"><img src="img\bilibili.png" height="30" width="30" title="bilibili" /></a>   
+        <a href="https://github.com/lovesdh"><img src="img\github.png" height="30" width="30" title="github"/></a>
+    </div>
+
+    <div id="oneword"></div>
+
+    <div class="box-container">
+        <div class="box-content">
+			<div class="button" id="sort-time-btn" >按时间排序</div>
+            <div class="button" id="sort-likes-btn">按点赞数排序</div>
+            <div id="posts"></div>
+            <div class="button" id="add-btn">添加笔记</div>
+        </div>
+    </div>
+
+    <script>
+        type="text/javascript"
+        var posts = [];		//数组来存放每一篇笔记
+
+        function renderPosts() {
+            var postsContainer = document.getElementById('posts');		//获取posts
+            postsContainer.innerHTML = "";		// 清空笔记列表
+
+			// 渲染笔记列表
+            posts.forEach(function(post) {
+                var postElement = document.createElement('div');
+                postElement.className = 'post';
+                postElement.innerHTML = `
+                    <h3>${post.title}</h3>
+                    <p>${post.content}</p>
+                    <p>创建时间:${new Date(post.time).toLocaleString()}</p>
+                    <p>编辑时间：${new Date(post.editTime).toLocaleString()}</p>
+                    <p>点赞数量：${post.likes}</p>
+                    <div class="post-footer">
+                        <button class="btn-like" data-id="${post.id}">赞</button>
+                        <button class="btn-delete" data-id="${post.id}">删除</button>
+                        <button class="btn-edit" data-id="${post.id}">编辑</button>
+                    </div>
+                    <div class="comments"></div>`;
+
+                postsContainer.appendChild(postElement);
+
+                //设置按钮
+                var likeBtn = postElement.querySelector('.btn-like');
+                var deleteBtn = postElement.querySelector('.btn-delete');
+                var editBtn = postElement.querySelector('.btn-edit');
+
+                likeBtn.addEventListener('click', function() {
+                    likePost(post.id);
+                });
+
+                deleteBtn.addEventListener('click', function() {
+                    deletePost(post.id);
+                });
+
+                editBtn.addEventListener('click', function() {
+                    editPost(post.id);
+                });
+            });
+        }
+
+		//定义Post函数
+        function addPost() {
+            var title = prompt('请输入标题');
+            var content = prompt('请输入笔记内容');
+
+			//post内容
+            var post = {
+                id: Date.now(),
+                title: title,
+                content: content,
+                time: Date.now(),
+                editTime: null,
+                likes: 0,
+				timestamp: Date.now()
+            };
+
+            posts.push(post);		// 将post添加到数组中
+            renderPosts();		//重新渲染
+        }
+
+		//定义编辑函数
+        function editPost(id) {
+            var post = posts.find(function(post) {
+                return post.id === id;
+            });
+
+            if (post) {
+                var newTitle = prompt('请输入新的标题', post.title);
+                var newContent = prompt('请输入新的笔记', post.content);
+
+				//更新post属性
+                post.title = newTitle;
+                post.content = newContent;
+                post.editTime = Date.now();
+
+                renderPosts();		//重新渲染
+            }
+        }
+
+		//定义删除
+        function deletePost(id) {
+            var index = posts.findIndex(function(post) {
+                return post.id === id;
+            });
+
+            if (index !== -1) {
+                posts.splice(index, 1);
+                renderPosts();
+            }
+        }
+
+		//定义点赞
+        function likePost(id) {
+            var post = posts.find(function(post) {
+                return post.id === id;
+            });
+
+            if (post) {
+                post.likes++;
+                renderPosts();
+            }
+        }
+
+		//使用post函数
+        var addBtn = document.getElementById('add-btn');
+        addBtn.addEventListener('click', function() {
+            addPost();
+        });
+        renderPosts();
+
+		//按时间排序
+		var sortTimeBtn = document.getElementById('sort-time-btn');
+			sortTimeBtn.addEventListener('click', function(){
+   			 	posts.sort(function(a, b) {
+       		 		return b.timestamp - a.timestamp;
+    		});
+   			 	renderPosts();
+			});
+
+		//按点赞排序
+		var sortLikesBtn = document.getElementById('sort-likes-btn');
+			sortLikesBtn.addEventListener('click', function(){
+				posts.sort(function(a, b) {
+					return b.likes - a.likes;
+				});
+				renderPosts();
+			});
+
+        //API
+        window.onload = function() {
+				var hitokotoXmlhttp = new XMLHttpRequest();
+                hitokotoXmlhttp.onreadystatechange = function() {
+					if (hitokotoXmlhttp.readyState == 4 && hitokotoXmlhttp.status == 200) {
+					const xmldoc = hitokotoXmlhttp.responseText;
+					var obj = JSON.parse(xmldoc);
+					var onewordElement = document.getElementById("oneword");
+
+					if (obj.from_who != null) {
+						onewordElement.innerHTML = "&emsp;"+obj.hitokoto + "<br>" + "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" + "《" + obj.from + "》" + obj.from_who+"&emsp;";
+					} else {
+						onewordElement.innerHTML = "&emsp;"+obj.hitokoto + "<br>" + "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;" + "《" + obj.from + "》"+"&emsp;";
+					}
+
+					onewordElement.className = "oneword-info";
+					}
+				};
+                hitokotoXmlhttp.open("GET", "https://v1.hitokoto.cn/?a", true);
+				hitokotoXmlhttp.send();
+            }
+
+    </script>
+</body>
+</html>
